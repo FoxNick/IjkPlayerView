@@ -459,7 +459,7 @@ public class IjkVideoView extends FrameLayout implements MediaController.MediaPl
             mCurrentBufferPercentage = 0;
             String scheme = mUri.getScheme();
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && mIsUsingMediaDataSource &&
-                    (TextUtils.isEmpty(scheme) || scheme.equalsIgnoreCase("file"))) {
+                    (TextUtils.isEmpty(scheme) || "file".equalsIgnoreCase(scheme))) {
                 IMediaDataSource dataSource = new FileMediaDataSource(new File(mUri.toString()));
                 mMediaPlayer.setDataSource(dataSource);
             } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
