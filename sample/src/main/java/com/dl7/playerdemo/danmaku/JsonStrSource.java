@@ -2,6 +2,8 @@ package com.dl7.playerdemo.danmaku;
 
 import android.net.Uri;
 import android.text.TextUtils;
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 
 import org.json.JSONException;
 
@@ -50,7 +52,7 @@ public class JsonStrSource implements IDataSource<String> {
     public JsonStrSource(Uri uri) throws IOException, JSONException {
         String scheme = uri.getScheme();
         if (SCHEME_HTTP_TAG.equalsIgnoreCase(scheme) || SCHEME_HTTPS_TAG.equalsIgnoreCase(scheme)) {
-            init(new URL(uri.getPath()).openStream());
+            init(Urls.create(uri.getPath(), Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS).openStream());
         } else if (SCHEME_FILE_TAG.equalsIgnoreCase(scheme)) {
             init(new FileInputStream(uri.getPath()));
         }
